@@ -14,7 +14,9 @@ namespace MVC_study.Controllers
         {
             var db = new FabricsEntities();
             //var data = db.Product.Where(p => p.ProductName.StartsWith("C")&p.Price>=5&p.Price<=10);
-            var data = db.Product;
+            //var data = db.Product;
+            //最原始的做出sql
+            var data = db.Database.SqlQuery<Product>("select * from Product").AsQueryable();
             
             return View(data);
         }
