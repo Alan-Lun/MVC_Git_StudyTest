@@ -13,8 +13,8 @@ namespace MVC_study.Controllers
         public ActionResult Index()
         {
             var db = new FabricsEntities();
-            var data = db.Product.Where(p => p.ProductName.StartsWith("C")&p.Price>=5&p.Price<=10);
-           
+            //var data = db.Product.Where(p => p.ProductName.StartsWith("C")&p.Price>=5&p.Price<=10);
+            var data = db.Product;
             
             return View(data);
         }
@@ -100,7 +100,29 @@ namespace MVC_study.Controllers
         // GET: CRUD/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            
+            var db = new FabricsEntities();
+            //找到要刪除的id
+            var client = db.Client.Find(id);
+            //foreach先找到這資料表最後一個關聯性先找最後一筆做刪除
+            foreach (var order in client.Order.ToList())
+            {
+
+                //找到order的關聯orderLine做刪除
+                db.OrderLine.RemoveRange(order.OrderLine);
+
+            }
+            //再將order中與這個client有關連到的做移除
+            db.Order.RemoveRange(client.Order.ToList());
+            //將選擇的id做移除
+            db.Client.Remove(client);
+            //做交易處理正式嘗試移除
+            db.SaveChanges();
+
+
+
+            //return View();
+            return RedirectToAction("Index");
         }
 
         // POST: CRUD/Delete/5
