@@ -28,6 +28,7 @@ namespace MVC_study.Controllers
         // GET: CRUD/Create
         public ActionResult Create()
         {
+
             return View();
         }
 
@@ -38,7 +39,17 @@ namespace MVC_study.Controllers
             try
             {
                 // TODO: Add insert logic here
+                //Product c = new Product();
+                Product P = new Product();
+                P.ProductName = Convert.ToString(collection["ProductName"]);
+                P.Price = Convert.ToDecimal(collection["Price"]);
+                P.Active = true;
+                P.Stock = Convert.ToDecimal(collection["Stock"]);
 
+                var db = new FabricsEntities();
+                db.Product.Add(P);
+                db.SaveChanges();
+                
                 return RedirectToAction("Index");
             }
             catch
