@@ -11,6 +11,7 @@ namespace MVC_study.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Product
     {
@@ -20,9 +21,14 @@ namespace MVC_study.Models
         }
     
         public int ProductId { get; set; }
+        [Required(ErrorMessageResourceType = typeof(Resources.Resource1_en_US), ErrorMessageResourceName = "ProductRequired")]
+        [StringLength(10)]
         public string ProductName { get; set; }
+        [Required]
         public Nullable<decimal> Price { get; set; }
+        [Required]
         public Nullable<bool> Active { get; set; }
+        [Required]
         public Nullable<decimal> Stock { get; set; }
     
         public virtual ICollection<OrderLine> OrderLine { get; set; }
