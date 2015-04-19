@@ -40,7 +40,10 @@ namespace MVC_study.Controllers
             {
                 // TODO: Add insert logic here
                 //Product c = new Product();
+                //產生一個Product物件
                 Product P = new Product();
+                //將上面的collection帶入就是傳進來的 collection["這是網頁上的name"]
+                //型別的部分滑鼠移過去就可以看到要轉什麼型別
                 P.ProductName = Convert.ToString(collection["ProductName"]);
                 P.Price = Convert.ToDecimal(collection["Price"]);
                 P.Active = true;
