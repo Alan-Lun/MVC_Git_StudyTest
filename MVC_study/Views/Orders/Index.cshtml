@@ -42,6 +42,7 @@
             @*@Html.DisplayFor(modelItem => item.Client.FirstName)*@
             @* 連結到某地，第八個方式 連結文字,action Name,Controller Name,router value值,包含針對項目的HTML屬性 *@
             @Html.ActionLink(item.Client.FirstName, "Details", "Clients", new { id=item.Client.ClientId},null)
+            
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.OrderId }) |

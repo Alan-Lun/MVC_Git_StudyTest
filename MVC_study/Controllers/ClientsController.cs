@@ -14,6 +14,17 @@ namespace MVC_study.Controllers
     {
         private FabricsEntities db = new FabricsEntities();
 
+        public ActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Login(LoginVM data)
+        {
+            //return View();
+            return View("LoginResult",data);
+        }
+
         // GET: Clients
         public ActionResult Index()
         {
