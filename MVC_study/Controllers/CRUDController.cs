@@ -47,6 +47,20 @@ namespace MVC_study.Controllers
             }
         }
 
+        public ActionResult BatchUpdate()
+        {
+            var db = new FabricsEntities();
+            var data = db.Product.Where(p => p.ProductName.StartsWith("C"));
+
+            foreach (var item in data)
+            {
+                item.Price = item.Price * 2;
+            }
+            db.SaveChanges();
+            //return View();
+            return RedirectToAction("Index");
+        }
+
         // GET: CRUD/Edit/5
         public ActionResult Edit(int id)
         {
